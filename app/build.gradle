@@ -4,12 +4,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    compileSdkVersion 26
     defaultConfig {
         applicationId "com.wingsofts.gankclient"
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -27,13 +26,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.0.1'
-
-
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:26.1.0'
     def dependencies = rootProject.ext.dependencies
 
     compile dependencies.supportDesign
@@ -61,15 +56,16 @@ dependencies {
     compile dependencies.kotlinReflect
 
     //deep link
-    compile 'com.airbnb:deeplinkdispatch:2.0.1'
+    implementation 'com.airbnb:deeplinkdispatch:2.0.1'
     kapt 'com.airbnb:deeplinkdispatch-processor:2.0.1'
 
 
-    compile 'com.github.githubwing:ByeBurger:1.2.2'
-    kapt 'com.android.databinding:compiler:1.0-rc5'
+    implementation 'com.github.githubwing:ByeBurger:1.2.3'
+    //android.databinding.BindingBuildInfo missing element enableDebugLogs
+    kapt 'com.android.databinding:compiler:2.3.0'
     // Kotlin
 //    compile dependencies.kotlinStdlib
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 }
 kapt {
     generateStubs = true
